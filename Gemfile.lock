@@ -1,3 +1,9 @@
+GIT
+  remote: git://github.com/twitter/activerecord-reputation-system.git
+  revision: df77666a5d61ce74781b11a84c1a8944cff10779
+  specs:
+    activerecord-reputation-system (3.0.1)
+
 GEM
   remote: https://rubygems.org/
   specs:
@@ -155,6 +161,7 @@ PLATFORMS
   ruby
 
 DEPENDENCIES
+  activerecord-reputation-system!
   byebug
   coffee-rails (~> 4.1.0)
   devise
