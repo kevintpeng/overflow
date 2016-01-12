@@ -11,17 +11,17 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160110014316) do
+ActiveRecord::Schema.define(version: 20160111235423) do
 
   create_table "answers", force: :cascade do |t|
     t.text     "response"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-    t.integer  "comment_id"
+    t.datetime "created_at",  null: false
+    t.datetime "updated_at",  null: false
     t.integer  "user_id"
+    t.integer  "question_id"
   end
 
-  add_index "answers", ["comment_id"], name: "index_answers_on_comment_id"
+  add_index "answers", ["question_id"], name: "index_answers_on_question_id"
   add_index "answers", ["user_id"], name: "index_answers_on_user_id"
 
   create_table "comments", force: :cascade do |t|
@@ -40,13 +40,11 @@ ActiveRecord::Schema.define(version: 20160110014316) do
     t.string   "statement"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.integer  "answer_id"
-    t.integer  "comment_id"
     t.integer  "user_id"
+    t.integer  "topic_id"
   end
 
-  add_index "questions", ["answer_id"], name: "index_questions_on_answer_id"
-  add_index "questions", ["comment_id"], name: "index_questions_on_comment_id"
+  add_index "questions", ["topic_id"], name: "index_questions_on_topic_id"
   add_index "questions", ["user_id"], name: "index_questions_on_user_id"
 
   create_table "rs_evaluations", force: :cascade do |t|
@@ -102,18 +100,16 @@ ActiveRecord::Schema.define(version: 20160110014316) do
   end
 
   create_table "tags", force: :cascade do |t|
+    t.string   "name"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end
 
   create_table "topics", force: :cascade do |t|
     t.text     "contents"
-    t.datetime "created_at",  null: false
-    t.datetime "updated_at",  null: false
-    t.integer  "question_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
   end
-
-  add_index "topics", ["question_id"], name: "index_topics_on_question_id"
 
   create_table "users", force: :cascade do |t|
     t.string   "username"
