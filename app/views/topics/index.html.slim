@@ -1,12 +1,6 @@
-doctype html
-html
-  head
-    javascript:
-      alert(a)
+body
+  h1 Topics List
 
-  body
-    h1 Topics List
-
-    #content
-      - @topics.each do |topic|
-        - #{topic.name}
+  #content
+    - @topics.each do |topic|
+        = link_to topic.name, topic_path(topic)
