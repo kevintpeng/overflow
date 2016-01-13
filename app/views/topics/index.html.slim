@@ -5,8 +5,8 @@ html
       alert(a)
 
   body
-    -
-    h1 Markup examples
+    h1 Topics List
 
     #content
-      p This example shows you how a basic Slim file looks.
+      - @topics.each do |topic|
+        - #{topic.name}
