@@ -11,7 +11,10 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160111235423) do
+ActiveRecord::Schema.define(version: 20160113030107) do
+
+  # These are extensions that must be enabled in order to support this database
+  enable_extension "plpgsql"
 
   create_table "answers", force: :cascade do |t|
     t.text     "response"
@@ -21,8 +24,8 @@ ActiveRecord::Schema.define(version: 20160111235423) do
     t.integer  "question_id"
   end
 
-  add_index "answers", ["question_id"], name: "index_answers_on_question_id"
-  add_index "answers", ["user_id"], name: "index_answers_on_user_id"
+  add_index "answers", ["question_id"], name: "index_answers_on_question_id", using: :btree
+  add_index "answers", ["user_id"], name: "index_answers_on_user_id", using: :btree
 
   create_table "comments", force: :cascade do |t|
     t.text     "reply"
@@ -33,8 +36,8 @@ ActiveRecord::Schema.define(version: 20160111235423) do
     t.integer  "user_id"
   end
 
-  add_index "comments", ["commentable_type", "commentable_id"], name: "index_comments_on_commentable_type_and_commentable_id"
-  add_index "comments", ["user_id"], name: "index_comments_on_user_id"
+  add_index "comments", ["commentable_type", "commentable_id"], name: "index_comments_on_commentable_type_and_commentable_id", using: :btree
+  add_index "comments", ["user_id"], name: "index_comments_on_user_id", using: :btree
 
   create_table "questions", force: :cascade do |t|
     t.string   "statement"
@@ -44,8 +47,8 @@ ActiveRecord::Schema.define(version: 20160111235423) do
     t.integer  "topic_id"
   end
 
-  add_index "questions", ["topic_id"], name: "index_questions_on_topic_id"
-  add_index "questions", ["user_id"], name: "index_questions_on_user_id"
+  add_index "questions", ["topic_id"], name: "index_questions_on_topic_id", using: :btree
+  add_index "questions", ["user_id"], name: "index_questions_on_user_id", using: :btree
 
   create_table "rs_evaluations", force: :cascade do |t|
     t.string   "reputation_name"
@@ -59,10 +62,10 @@ ActiveRecord::Schema.define(version: 20160111235423) do
     t.text     "data"
   end
 
-  add_index "rs_evaluations", ["reputation_name", "source_id", "source_type", "target_id", "target_type"], name: "index_rs_evaluations_on_reputation_name_and_source_and_target", unique: true
-  add_index "rs_evaluations", ["reputation_name"], name: "index_rs_evaluations_on_reputation_name"
-  add_index "rs_evaluations", ["source_id", "source_type"], name: "index_rs_evaluations_on_source_id_and_source_type"
-  add_index "rs_evaluations", ["target_id", "target_type"], name: "index_rs_evaluations_on_target_id_and_target_type"
+  add_index "rs_evaluations", ["reputation_name", "source_id", "source_type", "target_id", "target_type"], name: "index_rs_evaluations_on_reputation_name_and_source_and_target", unique: true, using: :btree
+  add_index "rs_evaluations", ["reputation_name"], name: "index_rs_evaluations_on_reputation_name", using: :btree
+  add_index "rs_evaluations", ["source_id", "source_type"], name: "index_rs_evaluations_on_source_id_and_source_type", using: :btree
+  add_index "rs_evaluations", ["target_id", "target_type"], name: "index_rs_evaluations_on_target_id_and_target_type", using: :btree
 
   create_table "rs_reputation_messages", force: :cascade do |t|
     t.integer  "sender_id"
@@ -73,9 +76,9 @@ ActiveRecord::Schema.define(version: 20160111235423) do
     t.datetime "updated_at"
   end
 
-  add_index "rs_reputation_messages", ["receiver_id", "sender_id", "sender_type"], name: "index_rs_reputation_messages_on_receiver_id_and_sender", unique: true
-  add_index "rs_reputation_messages", ["receiver_id"], name: "index_rs_reputation_messages_on_receiver_id"
-  add_index "rs_reputation_messages", ["sender_id", "sender_type"], name: "index_rs_reputation_messages_on_sender_id_and_sender_type"
+  add_index "rs_reputation_messages", ["receiver_id", "sender_id", "sender_type"], name: "index_rs_reputation_messages_on_receiver_id_and_sender", unique: true, using: :btree
+  add_index "rs_reputation_messages", ["receiver_id"], name: "index_rs_reputation_messages_on_receiver_id", using: :btree
+  add_index "rs_reputation_messages", ["sender_id", "sender_type"], name: "index_rs_reputation_messages_on_sender_id_and_sender_type", using: :btree
 
   create_table "rs_reputations", force: :cascade do |t|
     t.string   "reputation_name"
@@ -89,9 +92,9 @@ ActiveRecord::Schema.define(version: 20160111235423) do
     t.text     "data"
   end
 
-  add_index "rs_reputations", ["reputation_name", "target_id", "target_type"], name: "index_rs_reputations_on_reputation_name_and_target", unique: true
-  add_index "rs_reputations", ["reputation_name"], name: "index_rs_reputations_on_reputation_name"
-  add_index "rs_reputations", ["target_id", "target_type"], name: "index_rs_reputations_on_target_id_and_target_type"
+  add_index "rs_reputations", ["reputation_name", "target_id", "target_type"], name: "index_rs_reputations_on_reputation_name_and_target", unique: true, using: :btree
+  add_index "rs_reputations", ["reputation_name"], name: "index_rs_reputations_on_reputation_name", using: :btree
+  add_index "rs_reputations", ["target_id", "target_type"], name: "index_rs_reputations_on_target_id_and_target_type", using: :btree
 
   create_table "tagging_relationships", force: :cascade do |t|
     t.string   "name"
@@ -109,6 +112,7 @@ ActiveRecord::Schema.define(version: 20160111235423) do
     t.text     "contents"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.text     "name"
   end
 
   create_table "users", force: :cascade do |t|
@@ -127,7 +131,7 @@ ActiveRecord::Schema.define(version: 20160111235423) do
     t.datetime "updated_at",                          null: false
   end
 
-  add_index "users", ["email"], name: "index_users_on_email", unique: true
-  add_index "users", ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
+  add_index "users", ["email"], name: "index_users_on_email", unique: true, using: :btree
+  add_index "users", ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true, using: :btree
 
 end
