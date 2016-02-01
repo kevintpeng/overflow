@@ -3,7 +3,11 @@ body
 
   #content
     - @questions.each do |question|
-      - if (question.statement.length > 200)
-        h3 = link_to "#{question.statement[0..200]}...", topic_questions_path(question)
+      -question_string = ""
+      - if (question.statement.length > 100)
+        - question_string = question.statement[0..100] + "..."
       - else
-        h3 = link_to question.statement, topic_question_path(@topic, question)
+        - question_string = question.statement
+      - if question.identifier!=nil
+        - question_string = "Question #{question.identifier}: #{question_string}"
+      h3 = link_to question_string, topic_question_path(@topic, question)

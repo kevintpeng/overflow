@@ -1,3 +1,5 @@
 h3 #{@question.statement}
+p posted #{@question.created_at}
+= link_to "add a comment"
 hr
 h3 #{@question.answers.length} Answers
