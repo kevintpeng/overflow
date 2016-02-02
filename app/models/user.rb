@@ -8,4 +8,8 @@ class User < ActiveRecord::Base
   has_many :questions
   has_many :answers
   has_many :comments
+
+  has_many :evaluations, class_name: "RSEvaluation", as: :source
+
+  has_reputation :votes, source: {reputation: :votes, of: :answers}, aggregated_by: :sum
 end

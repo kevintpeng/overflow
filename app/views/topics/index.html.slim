@@ -3,4 +3,5 @@ body
 
   #content
     - @topics.each do |topic|
+      h3
         = link_to topic.name, topic_path(topic)
