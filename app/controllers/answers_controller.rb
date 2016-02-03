@@ -7,7 +7,7 @@ class AnswersController < ApplicationController
     if @answer.save
       flash[:success] = "Your answer was added."
       # redirect back to the question
-      redirect_to topic_question_path(:topic_id => @question.topic_id, :id => @answer.question_id)
+      redirect_to question_path(:id => @answer.question_id)
     else
       redirect_to :back
     end
