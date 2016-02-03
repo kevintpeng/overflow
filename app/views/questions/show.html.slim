@@ -14,13 +14,13 @@ hr
     = f.hidden_field :question_id, value: @question.id
     = f.label "Answer"
     br
-    = f.text_field :response
+    = f.text_field :response, placeholder: "Final Answer...", :rows => "1", :class => 'form-control'
     br
     = f.label :explanation
     br
-    = f.text_area :explanation
+    = f.text_area :explanation, placeholder: "Your Explanation...", :rows => "4", :class => 'form-control'
     br
-    = f.submit
+    = f.submit "Submit Response", class: "btn btn-primary", data: {disable_with: "Submitting..."}
 - else
   a class="btn btn-primary" "Login"
   a class = "btn btn-primary" "Sign Up"
