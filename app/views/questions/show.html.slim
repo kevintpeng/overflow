@@ -9,9 +9,10 @@ hr
     span.date
       = " #{time_ago_in_words comment.created_at} ago"
 
-
-= form_for([@question, Comment.new]) do |f|
-  .form-group
+a.date class="toggle_#{@question.class.to_s[0].downcase}#{@question.id}" href="#" add a comment
+// takes the first letter of the class
+.form-group class="#{@question.class.to_s[0].downcase}#{@question.id}"
+  = form_for([@question, Comment.new]) do |f|
     = f.text_area :reply, placeholder: "Your comment...", :rows => "1", :class => 'form-control'
     = f.submit "Add a comment", class: "btn btn-primary", data: {disable_with: "Submitting..."}
 
@@ -19,12 +20,13 @@ hr
 h3 #{@question.answers.length} Answers
 hr
 - @question.answers.order(:created_at).each do |answer|
-  h5 "#{answer.response}"
+  h4 Final Answer: #{answer.response}
   p #{answer.explanation}
-  p.date #{time_ago_in_words answer.created_at} ago
+  p.date answered #{time_ago_in_words answer.created_at} ago
   p
     a href="#" #{User.find(answer.user_id).username}
-hr
+  hr
+
 - if signed_in?
   = form_for @answer do |f|
     = f.hidden_field :question_id, value: @question.id

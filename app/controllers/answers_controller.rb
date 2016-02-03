@@ -1,8 +1,11 @@
 class AnswersController < ApplicationController
 
   def create
-    @question = Question.find params[:answer][:question_id]
-    @answer = @question.answers.new answers_params
+    answer_params = params[:answer]
+    @question = Question.find answer_params[:question_id]
+    @answer = @question.answers.new
+    @answer.response = answer_params[:response]
+    @answer.explanation = answer_params[:explanation]
     @answer.user = current_user
     if @answer.save
       flash[:success] = "Your answer was added."
@@ -12,10 +15,5 @@ class AnswersController < ApplicationController
       redirect_to :back
     end
 
-  end
-
-  private
-  def answers_params
-    params.permit(:response, :user_id, :explanation)
   end
 end
