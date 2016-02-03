@@ -3,3 +3,8 @@ p posted #{@question.created_at}
 = link_to "add a comment"
 hr
 h3 #{@question.answers.length} Answers
+hr
+= form_for :answer do |f|
+  = f.text_area "1000x30"
+  br
+  = f.submit
