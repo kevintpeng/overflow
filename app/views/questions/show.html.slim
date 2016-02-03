@@ -1,10 +1,10 @@
 h3 #{@question.statement}
 p posted #{@question.created_at}
-= form_for([Topic.find @question.topic_id, @question, Comment.new], :remote => true) do |f|
+= form_for([@question, Comment.new]) do |f|
   .form-group
-    = f.text_area :body, placeholder: "Your comment...", :rows => "1", :class => 'form-control'
-    = f.submit "Submit", class: "btn btn-primary", data: {disable_with: "Submitting..."}
-= link_to "add a comment"
+    = f.text_area :reply, placeholder: "Your comment...", :rows => "1", :class => 'form-control'
+    = f.submit "Add a comment", class: "btn btn-primary", data: {disable_with: "Submitting..."}
+
 hr
 h3 #{@question.answers.length} Answers
 

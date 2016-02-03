@@ -9,6 +9,7 @@ module ApplicationHelper
     when :alert then "alert alert-danger"
     end
   end
+  
   def find_commentable   # gets the type of comment to create
     params.each do |name, value|
       # matches the type of id using regex
