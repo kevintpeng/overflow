@@ -9,9 +9,20 @@ hr
     span.date
       = " #{time_ago_in_words comment.created_at} ago"
 
-a.date class="toggle_#{@question.class.to_s[0].downcase}#{@question.id}" href="#" add a comment
+javascript:
+  function toggle(){
+    var section = document.getElementById("#{@question.class.to_s[0].downcase}#{@question.id}");
+    section.style.display = (section.style.display == 'block') ? 'none' : 'block';
+  }
+
+// toggle should change class
+// add event listener to the element from javascript
+// get elements by class
+// add event listener
+
+a.date class="toggle_#{@question.class.to_s[0].downcase}#{@question.id}" onclick="toggle()" add a comment
 // takes the first letter of the class
-.form-group class="#{@question.class.to_s[0].downcase}#{@question.id}"
+div.form-group style="display: none;" id="#{@question.class.to_s[0].downcase}#{@question.id}"
   = form_for([@question, Comment.new]) do |f|
     = f.text_area :reply, placeholder: "Your comment...", :rows => "1", :class => 'form-control'
     = f.submit "Add a comment", class: "btn btn-primary", data: {disable_with: "Submitting..."}
