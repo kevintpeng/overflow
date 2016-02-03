@@ -1,6 +1,6 @@
 module ApplicationHelper
   # conversion of flash values to html class
-  def flash_class(level)1
+  def flash_class(level)
     level = level.to_sym
     case level
     when :notice then "alert alert-info"
