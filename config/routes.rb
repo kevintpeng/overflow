@@ -6,9 +6,9 @@ Rails.application.routes.draw do
   # TODO fix nested structure to shallow
   resources :topics do
     resources :comments
-    resources :questions do
-      resources :comments
-    end
+  end
+  resources :questions do
+    resources :comments
   end
   resources :tags
   resources :answers do

@@ -10,4 +10,4 @@ body
         - question_string = question.statement
       - if question.identifier!=nil
         - question_string = "Question #{question.identifier}: #{question_string}"
-      h3 = link_to question_string, topic_question_path(@topic, question)
+      h3 = link_to question_string, question_path(question)
