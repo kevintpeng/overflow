@@ -8,7 +8,7 @@ hr
       = "#{User.find(comment.user_id).username}"
     span.date
       = " #{time_ago_in_words comment.created_at} ago"
-    
+
 
 = form_for([@question, Comment.new]) do |f|
   .form-group
@@ -17,7 +17,13 @@ hr
 
 hr
 h3 #{@question.answers.length} Answers
-
+hr
+- @question.answers.order(:created_at).each do |answer|
+  h5 "#{answer.response}"
+  p #{answer.explanation}
+  p.date #{time_ago_in_words answer.created_at} ago
+  p
+    a href="#" #{User.find(answer.user_id).username}
 hr
 - if signed_in?
   = form_for @answer do |f|
