@@ -12,6 +12,7 @@ Rails.application.routes.draw do
   end
   resources :tags
   resources :answers do
+    member { post :vote }
     resources :comments
   end
 

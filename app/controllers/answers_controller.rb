@@ -3,6 +3,8 @@ class AnswersController < ApplicationController
   def create
     answer_params = params[:answer]
     @question = Question.find answer_params[:question_id]
+
+    # TODO should refactor into standard strong params
     @answer = @question.answers.new
     @answer.response = answer_params[:response]
     @answer.explanation = answer_params[:explanation]
@@ -14,6 +16,11 @@ class AnswersController < ApplicationController
     else
       redirect_to :back
     end
-
   end
+
+  def vote
+    value = params[:type] == "up" ? 1 : -1
+    @answer = Answer.find(params[:id])
+    @answer.add_evaluation :votes, value, current_user
+    redirect_to :back, notice: "Thank you for voting"
 end

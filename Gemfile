@@ -4,9 +4,6 @@ source 'https://rubygems.org'
 # Authentication
 gem 'devise'
 
-# reputation
-gem 'activerecord-reputation-system', :git => 'git://github.com/twitter/activerecord-reputation-system.git'
-
 gem 'slim'
 
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
@@ -49,3 +46,6 @@ gem 'spring'
 
 # for the asset pipeline
 gem 'rails_12factor', group: :production
+
+# reputation
+gem 'activerecord-reputation-system', require: 'reputation_system'

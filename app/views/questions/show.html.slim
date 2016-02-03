@@ -1,13 +1,18 @@
 h3 #{@question.statement}
 p.date posted #{time_ago_in_words @question.created_at} ago
-hr
-- @question.comments.order(:created_at).each do |comment|
-  p
-    = "#{comment.reply} – "
-    a href="#"
-      = "#{User.find(comment.user_id).username}"
-    span.date
-      = " #{time_ago_in_words comment.created_at} ago"
+.container
+  table.table.table-hover
+    - @question.comments.order(:created_at).each do |comment|
+      tbody
+        tr
+          td
+            #{comment.id}
+          td
+            = "#{comment.reply} – "
+            a href="#"
+              = "#{User.find(comment.user_id).username}"
+            span.date
+              = " #{time_ago_in_words comment.created_at} ago"
 
 javascript:
   function toggle(){
