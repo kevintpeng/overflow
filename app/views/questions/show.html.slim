@@ -4,13 +4,18 @@ p posted #{@question.created_at}
 hr
 h3 #{@question.answers.length} Answers
 hr
-= form_for @answer do |f|
-  = f.label "Answer"
-  br
-  = f.text_field :response
-  br
-  = f.label :explanation
-  br
-  = f.text_area :explanation
-  br
-  = f.submit
+- if signed_in?
+  = form_for @answer do |f|
+    = f.hidden_field :question_id, value: @question.id
+    = f.label "Answer"
+    br
+    = f.text_field :response
+    br
+    = f.label :explanation
+    br
+    = f.text_area :explanation
+    br
+    = f.submit
+- else
+  a class="btn btn-primary" "Login"
+  a class = "btn btn-primary" "Sign Up"

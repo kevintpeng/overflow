@@ -10,10 +10,11 @@ class TopicsController < ApplicationController
   def create
     @topic = Topic.new(params)
     if @topic.save
-     flash[:success] = 'Your definition has been added!'
+     flash[:success] = 'Your topic has been added!'
      redirect_to @topic
     else
-     render 'new'
+      flash[:notice] = "The topic was not added :("
+     redirect_to root_path
     end
   end
 
