@@ -34,9 +34,9 @@ div.form-group style="display: none;" id="#{@question.class.to_s[0].downcase}#{@
     = f.submit "Add a comment", class: "btn btn-primary", data: {disable_with: "Submitting..."}
 
 hr
-h3 #{@question.answers.length} Answers
+h3 #{@answers.length} Answers
 table.table
-  - @question.answers.order(:created_at).each do |answer|
+  - @answers.each do |answer|
     tbody
       tr
         td
