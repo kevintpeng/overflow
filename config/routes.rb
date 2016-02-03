@@ -3,9 +3,15 @@ Rails.application.routes.draw do
   devise_for :users, :controllers => { registrations: 'users/registrations'}
 
   root 'topics#index'
+  # TODO fix nested structure to shallow
   resources :topics do
-    resources :questions
+    resources :questions do
+      resources :comments
+    end
   end
   resources :tags
-  resources :answers
+  resources :answers do
+    resources :comments
+  end
+
 end
