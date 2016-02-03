@@ -1,8 +1,13 @@
 h3 #{@question.statement}
 p posted #{@question.created_at}
+= form_for([Topic.find @question.topic_id, @question, Comment.new], :remote => true) do |f|
+  .form-group
+    = f.text_area :body, placeholder: "Your comment...", :rows => "1", :class => 'form-control'
+    = f.submit "Submit", class: "btn btn-primary", data: {disable_with: "Submitting..."}
 = link_to "add a comment"
 hr
 h3 #{@question.answers.length} Answers
+
 hr
 - if signed_in?
   = form_for @answer do |f|
