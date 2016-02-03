@@ -13,8 +13,7 @@ html
     = tag(:meta, property: "twitter:site", content: "@petrodictionary")
     = csrf_meta_tags
     meta property="og:image" content=asset_url('sv-large.png')
-    - if Rails.env.production?
-      = render 'layouts/ga'
+
   body
     script type="text/javascript" src="//s7.addthis.com/js/300/addthis_widget.js#pubid=ra-4e9e731461d9e491" async="async"
 
