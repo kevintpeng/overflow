@@ -1,5 +1,6 @@
 class CommentsController < ApplicationController
   def create
+    # fetches the record that the comment will belong to
     @commentable = find_commentable
     @comment = @commentable.comments.new
     @comment.reply = params[:comment][:reply]
@@ -14,10 +15,6 @@ class CommentsController < ApplicationController
 
 
   private
-
-  def comment_params
-    params.require(:reply)
-  end
 
   def find_commentable   # gets the type of comment to create
     params.each do |name, value|

@@ -1,5 +1,15 @@
 h3 #{@question.statement}
-p posted #{@question.created_at}
+p.date posted #{time_ago_in_words @question.created_at} ago
+hr
+- @question.comments.order(:created_at).each do |comment|
+  p
+    = "#{comment.reply} – "
+    a href="#"
+      = "#{User.find(comment.user_id).username}"
+    span.date
+      = " #{time_ago_in_words comment.created_at} ago"
+    
+
 = form_for([@question, Comment.new]) do |f|
   .form-group
     = f.text_area :reply, placeholder: "Your comment...", :rows => "1", :class => 'form-control'
