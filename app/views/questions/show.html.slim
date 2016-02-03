@@ -5,8 +5,9 @@ p.date posted #{time_ago_in_words @question.created_at} ago
     - @question.comments.order(:created_at).each do |comment|
       tbody
         tr
+          / Will be score here
           td
-            #{comment.id}
+            = comment.id
           td
             = "#{comment.reply} – "
             a href="#"
@@ -34,14 +35,22 @@ div.form-group style="display: none;" id="#{@question.class.to_s[0].downcase}#{@
 
 hr
 h3 #{@question.answers.length} Answers
-hr
-- @question.answers.order(:created_at).each do |answer|
-  h4 Final Answer: #{answer.response}
-  p #{answer.explanation}
-  p.date answered #{time_ago_in_words answer.created_at} ago
-  p
-    a href="#" #{User.find(answer.user_id).username}
-  hr
+table.table
+  - @question.answers.order(:created_at).each do |answer|
+    tbody
+      tr
+        td
+          = link_to "up", vote_answer_path(answer, type: "up"), method: "post"
+          br
+          = pluralize answer.reputation_for(:votes).to_i, "vote"
+          br
+          = link_to "down", vote_answer_path(answer, type: "down"), method: "post"
+        td
+          h4 Final Answer: #{answer.response}
+          p #{answer.explanation}
+          p.date answered #{time_ago_in_words answer.created_at} ago
+          p
+            a href="#" #{User.find(answer.user_id).username}
 
 - if signed_in?
   = form_for @answer do |f|
