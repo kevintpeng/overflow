@@ -6,6 +6,7 @@ class AnswersController < ApplicationController
     @answer.user = current_user
     if @answer.save
       flash[:success] = "Your answer was added."
+      # redirect back to the question
       redirect_to topic_question_path(:topic_id => @question.topic_id, :id => @answer.question_id)
     else
       redirect_to :back
@@ -15,6 +16,6 @@ class AnswersController < ApplicationController
 
   private
   def answers_params
-    params.permit(:response,:question_id, :user_id, :explanation)
+    params.permit(:response, :user_id, :explanation)
   end
 end
