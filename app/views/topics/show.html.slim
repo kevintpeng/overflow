@@ -1,13 +1,23 @@
 body
-  h1 Questions List for #{@topic.name}
-
-  #content
+  h3 #{@topic.name}
+  table.table
     - @questions.each do |question|
-      -question_string = ""
-      - if (question.statement.length > 100)
-        - question_string = question.statement[0..100] + "..."
-      - else
-        - question_string = question.statement
-      - if question.identifier!=nil
-        - question_string = "Question #{question.identifier}: #{question_string}"
-      h3 = link_to question_string, question_path(question)
+      thead
+        tr
+          td
+            h4 #
+          td
+            h4 Question
+      tbody
+        tr
+          td
+            - if question.identifier!=nil
+              h4 = link_to question.identifier, question_path(question)
+
+          td
+            -question_string = ""
+            - if (question.statement.length > 75)
+              - question_string = question.statement[0..75] + "..."
+            - else
+              - question_string = question.statement
+            h4 = link_to question_string, question_path(question)
