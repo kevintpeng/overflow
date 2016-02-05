@@ -2,7 +2,7 @@ h3 Question #{@question.identifier}:
 h4 #{@question.statement}
 
 p.date posted #{time_ago_in_words @question.created_at} ago
-=render partial: 'comment_section', locals: {commentable: @question}
+=render partial: '/comments/comment_section', locals: {commentable: @question}
 h3 #{@answers.length} Answers
 table.table
   - @answers.each do |answer|
@@ -19,7 +19,7 @@ table.table
           p.date answered #{time_ago_in_words answer.created_at} ago
           p
             a href="#" #{User.find(answer.user_id).username}
-          =render partial: 'comment_section', locals: {commentable: answer}
+          =render partial: '/comments/comment_section', locals: {commentable: answer}
 
 - if signed_in?
   = form_for @answer do |f|

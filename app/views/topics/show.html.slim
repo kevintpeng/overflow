@@ -1,5 +1,6 @@
 body
   h3 #{@topic.name}
+  =render partial: '/comments/comment_section', locals: {commentable: @topic}
   table.table
     - @questions.each do |question|
       thead
