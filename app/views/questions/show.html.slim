@@ -2,40 +2,7 @@ h3 Question #{@question.identifier}:
 h4 #{@question.statement}
 
 p.date posted #{time_ago_in_words @question.created_at} ago
-.container
-  table.table.table-hover
-    - @question.comments.order(:created_at).each do |comment|
-      tbody
-        tr
-          / Will be score here
-          td.comment-score
-            = comment.id
-          td
-            = "#{comment.reply} – "
-            a href="#"
-              = "#{User.find(comment.user_id).username}"
-            span.date
-              = " #{time_ago_in_words comment.created_at} ago"
-
-javascript:
-  function toggle(){
-    var section = document.getElementById("#{@question.class.to_s[0].downcase}#{@question.id}");
-    section.style.display = (section.style.display == 'block') ? 'none' : 'block';
-  }
-
-// toggle should change class
-// add event listener to the element from javascript
-// get elements by class
-// add event listener
-
-a.date class="toggle_#{@question.class.to_s[0].downcase}#{@question.id}" onclick="toggle()" add a comment
-// takes the first letter of the class
-div.form-group style="display: none;" id="#{@question.class.to_s[0].downcase}#{@question.id}"
-  = form_for([@question, Comment.new]) do |f|
-    = f.text_area :reply, placeholder: "Your comment...", :rows => "1", :class => 'form-control'
-    = f.submit "Add a comment", class: "btn btn-primary", data: {disable_with: "Submitting..."}
-
-hr
+=render partial: 'comment_section', locals: {commentable: @question}
 h3 #{@answers.length} Answers
 table.table
   - @answers.each do |answer|
@@ -52,6 +19,7 @@ table.table
           p.date answered #{time_ago_in_words answer.created_at} ago
           p
             a href="#" #{User.find(answer.user_id).username}
+          =render partial: 'comment_section', locals: {commentable: answer}
 
 - if signed_in?
   = form_for @answer do |f|

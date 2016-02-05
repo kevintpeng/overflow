@@ -7,7 +7,7 @@ class CommentsController < ApplicationController
     @comment.user_id = current_user.id
     if @comment.save
       flash[:success] = "Comment was added!"
-      redirect_to url_for @commentable
+      redirect_to :back
     else
       redirect_to :back
     end
