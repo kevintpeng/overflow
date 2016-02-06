@@ -1,0 +1,3 @@
+h3 For Tag: #{@tag.name}
+-@tag.topics.each do |topic|
+  = link_to topic.name, topic_path(topic)

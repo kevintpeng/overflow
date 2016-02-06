@@ -1,0 +1,13 @@
+h3 Popular Tags:
+table.table
+  thead
+    tr
+      td Tag
+      td # of Topics
+  tbody
+    - @tags.each do |tag|
+      tr
+        td
+          = link_to tag.name, tag_path(tag)
+        td
+          = tag.topics.length

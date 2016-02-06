@@ -6,6 +6,11 @@ ol.breadcrumb
 .jumbotron
   h2 #{@topic.name}
   p #{@topic.contents if @topic.contents != nil}
+  - if @topic.tags.any?
+    p Tags:
+    -@topic.tags.each do |tag|
+      button.btn
+        = link_to tag.name, tag_path(tag)
 table.table
   - @questions.each do |question|
     thead
