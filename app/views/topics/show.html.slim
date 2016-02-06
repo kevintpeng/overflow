@@ -6,7 +6,6 @@ ol.breadcrumb
 .jumbotron
   h2 #{@topic.name}
   p #{@topic.contents if @topic.contents != nil}
-=render partial: '/comments/comment_section', locals: {commentable: @topic}
 table.table
   - @questions.each do |question|
     thead
@@ -28,3 +27,6 @@ table.table
           - else
             - question_string = question.statement
           h4 = link_to question_string, question_path(question)
+hr
+h4 Comments
+=render partial: '/comments/comment_section', locals: {commentable: @topic}
