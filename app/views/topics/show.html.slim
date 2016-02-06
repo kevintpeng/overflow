@@ -6,10 +6,12 @@ ol.breadcrumb
 .jumbotron
   h2 #{@topic.name}
   p #{@topic.contents if @topic.contents != nil}
-  - if @topic.tags.any?
-    p Tags
-    -@topic.tags.each do |tag|
-      = link_to tag.name, tag_path(tag), :class => "btn btn-default"
+  = "Tags: "
+  -@topic.tags.each do |tag|
+    = link_to tag.name, tag_path(tag), :class => "btn btn-default"
+  = link_to edit_topic_path(@topic), :class => "btn btn-default" do
+    span.glyphicon.glyphicon-plus
+  end
 table.table
   - @questions.each do |question|
     thead

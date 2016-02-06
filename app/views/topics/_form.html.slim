@@ -9,8 +9,7 @@
   br
   =f.text_area :contents, :class => 'form-control'
   br
-  =f.label :tag_list
-  br
+  =f.label "Tags (list delimitted by commas)"
   =f.text_area :tag_list, :class => 'form-control'
   br
   = f.submit "Add Topic", class: "btn btn-primary", data: {disable_with: "Submitting..."}

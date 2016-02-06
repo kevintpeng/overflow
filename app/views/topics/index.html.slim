@@ -1,5 +1,7 @@
 body
-  = link_to "+", new_topic_path
+  = link_to new_topic_path do
+    span.glyphicon.glyphicon-plus
+  end
   h1 Topics List
 
   #content
