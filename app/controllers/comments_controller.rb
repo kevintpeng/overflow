@@ -2,8 +2,7 @@ class CommentsController < ApplicationController
   def create
     # fetches the record that the comment will belong to
     @commentable = find_commentable
-    @comment = @commentable.comments.new
-    @comment.reply = params[:comment][:reply]
+    @comment = @commentable.comments.new comment_params
     @comment.user_id = current_user.id
     if @comment.save
       flash[:success] = "Comment was added!"
@@ -15,6 +14,10 @@ class CommentsController < ApplicationController
 
 
   private
+
+  def comment_params
+    params.require(:comment).permit(:reply)
+  end
 
   def find_commentable   # gets the type of comment to create
     params.each do |name, value|
