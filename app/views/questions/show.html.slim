@@ -1,3 +1,10 @@
+ol.breadcrumb
+  li
+    =link_to "Topics List", topics_path()
+  li
+    =link_to @question.topic.name, topic_path(@question.topic)
+  li.active #{@question.identifier}
+
 h3 Question #{@question.identifier}:
 h4 #{@question.statement}
 

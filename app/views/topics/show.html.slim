@@ -1,24 +1,30 @@
-body
-  h3 #{@topic.name}
-  =render partial: '/comments/comment_section', locals: {commentable: @topic}
-  table.table
-    - @questions.each do |question|
-      thead
-        tr
-          td
-            h4 #
-          td
-            h4 Question
-      tbody
-        tr
-          td
-            - if question.identifier!=nil
-              h4 = link_to question.identifier, question_path(question)
+ol.breadcrumb
+  li
+    =link_to "Topics List", topics_path()
+  li.active #{@topic.name}
 
-          td
-            -question_string = ""
-            - if (question.statement.length > 75)
-              - question_string = question.statement[0..75] + "..."
-            - else
-              - question_string = question.statement
-            h4 = link_to question_string, question_path(question)
+.jumbotron
+  h2 #{@topic.name}
+  p #{@topic.contents if @topic.contents != nil}
+=render partial: '/comments/comment_section', locals: {commentable: @topic}
+table.table
+  - @questions.each do |question|
+    thead
+      tr
+        td
+          h4 #
+        td
+          h4 Question
+    tbody
+      tr
+        td
+          - if question.identifier!=nil
+            h4 = link_to question.identifier, question_path(question)
+
+        td
+          -question_string = ""
+          - if (question.statement.length > 75)
+            - question_string = question.statement[0..75] + "..."
+          - else
+            - question_string = question.statement
+          h4 = link_to question_string, question_path(question)
