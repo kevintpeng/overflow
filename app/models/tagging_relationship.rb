@@ -1,4 +1,4 @@
 class TaggingRelationship < ActiveRecord::Base
-  belongs_to :topic
   belongs_to :tag
+  belongs_to :topic
 end
