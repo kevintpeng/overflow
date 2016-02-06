@@ -7,10 +7,9 @@ ol.breadcrumb
   h2 #{@topic.name}
   p #{@topic.contents if @topic.contents != nil}
   - if @topic.tags.any?
-    p Tags:
+    p Tags
     -@topic.tags.each do |tag|
-      button.btn
-        = link_to tag.name, tag_path(tag)
+      = link_to tag.name, tag_path(tag), :class => "btn btn-default"
 table.table
   - @questions.each do |question|
     thead
